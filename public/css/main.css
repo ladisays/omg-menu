@@ -1,0 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+html form button i,
+body form button i {
+  margin-right: 10px;
+}
+html p,
+body p {
+  margin-top: 20px;
+  padding: 10px 15px;
+}

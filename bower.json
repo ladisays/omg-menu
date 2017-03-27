@@ -1,0 +1,29 @@
+{
+  "name": "template-pdf",
+  "description": "An app that creates pdf files based on data supplied for html template",
+  "main": "index.js",
+  "authors": [
+    "Ladi Adenusi"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.9",
+    "angular-ui-router": "^0.3.2",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "toastr": "^2.1.3"
+  },
+  "resolutions": {
+    "jquery": ">=1.6.3 <3"
+  }
+}

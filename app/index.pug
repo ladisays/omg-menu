@@ -1,0 +1,52 @@
+doctype html
+html(lang='en' ng-app='templatePDF')
+    head
+        title OMG!
+        meta(name='HandheldFriendly' content='True')
+        meta(name='MobileOptimized' content='320')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+
+        // CDN provided
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+        link(rel='stylesheet' href='/lib/toastr/toastr.min.css' type='text/css')
+        link(rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' type='text/css')
+
+        link(rel='stylesheet' href='/css/main.css' type='text/css')
+
+        base(href='/')
+
+    body
+        .container
+            .row
+                .col-xs-12
+                    form(ng-submit="create(menu)")
+                        .row
+                            .form-group.col-xs-6
+                                label Meal Type
+                                input.form-control(type="text" ng-model="menu.meal.type")
+                            .form-group.col-xs-6
+                                label Meal Title
+                                input.form-control(type="text" ng-model="menu.meal.title")
+                            .form-group.col-xs-6
+                                label Ingredients
+                                textarea.form-control(rows="4" ng-model="menu.ingredients")
+                            .form-group.col-xs-6
+                                label Allergens
+                                textarea.form-control(rows="4" ng-model="menu.allergens")
+                            .col-xs-6
+                                button.btn.btn-primary(type="submit" ng-disabled="creating")
+                                    i.fa.fa-spinner.fa-spin(ng-if="creating")
+                                    | {{ creating ? "Creating Menu..." : "Create Menu" }}
+                .col-xs-12
+                    p.bg-info(ng-if="downloadLink")
+                        | Your download link is available 
+                        a(ng-href="{{downloadLink}}" download) here
+
+        script(type='text/javascript' src='/lib/jquery/dist/jquery.min.js')
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
+        script(type='text/javascript' src='/lib/toastr/toastr.min.js')
+        script(type='text/javascript' src='/lib/angular/angular.min.js')
+        script(type='text/javascript' src='/lib/angular-ui-router/release/angular-ui-router.min.js')
+
+        script(type='text/javascript' src='/js/index.js')
+        

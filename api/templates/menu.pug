@@ -1,0 +1,175 @@
+doctype html
+html
+    head
+        title Oh My Green
+        meta(name='HandheldFriendly', content='True')
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+        style(type='text/css').
+            @font-face {
+            font-family: 'Brandon Text';
+            src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Bold.otf") format('opentype');
+            font-weight: 600;
+            }
+            @font-face {
+            font-family: 'Brandon Text';
+            src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Medium.otf") format('opentype');
+            font-weight: 500;
+            }
+            @font-face {
+            font-family: 'Brandon Text';
+            src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Regular.otf") format('opentype');
+            font-weight: 400;
+            }
+            @font-face {
+            font-family: 'Brandon Text';
+            src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Light.otf") format('opentype');
+            font-weight: 300;
+            }
+            @font-face {
+            font-family: 'Gotham Condensed';
+            src: url("http://zenbox.ohmygreen.com/fonts/GothamCondensed-Regular.otf") format('opentype');
+            font-weight: 400;
+            }
+            body {
+            font-family: "Brandon Text", sans-serif;
+            color: #222;
+            margin: 0;
+            }
+            .wrapper {
+            position: relative;
+            background-color: #0EAF27;
+            width: 960px;
+            height: 720px;
+            margin: 0 auto;
+            padding: 0 20px 0 4px;
+            }
+            .wrapper .header {
+            background-image: linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url("https://s3-us-west-2.amazonaws.com/zenbox-media/home-header@2x.jpg");
+            background-image: -webkit-linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url("https://s3-us-west-2.amazonaws.com/zenbox-media/home-header@2x.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 360px;
+            }
+            .wrapper .header .title {
+            padding: 75px 50px;
+            width: 55%;
+            }
+            .wrapper .header .title span {
+            display: block;
+            color: #FFF;
+            text-transform: uppercase;
+            }
+            .wrapper .header .title .meal-type {
+            font-size: 1.5em;
+            font-weight: 600;
+            }
+            .wrapper .header .title .meal-name {
+            font-size: 4em;
+            font-weight: 300;
+            line-height: 1.2;
+            }
+            .wrapper .content {
+            background-color: #fff;
+            height: 360px;
+            position: relative;
+            z-index: 2;
+            }
+            .wrapper .content:before {
+            background: inherit;
+            content: '';
+            display: block;
+            height: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            -webkit-backface-visibility: hidden;
+            transform-origin: 0;
+            transform: skewY(-5deg);
+            -webkit-transform-origin: 0;
+            -webkit-transform: skewY(-5deg);
+            }
+            .wrapper .content .sections {
+            margin-right: 100px;
+            }
+            .wrapper .content .sections .section {
+            display: inline-block;
+            padding-top: 30px;
+            padding-left: 50px;
+            }
+            .wrapper .content .sections .section.left {
+            width: 40%;
+            }
+            .wrapper .content .sections .section.right {
+            width: 47%;
+            float: right;
+            }
+            .wrapper .content .sections .section .title {
+            text-transform: uppercase;
+            font-weight: 600;
+            }
+            .wrapper .content .sections .section p {
+            font-size: 18px;
+            font-weight: 400;
+            }
+            .wrapper .content .sections .section ul {
+            padding: 0;
+            list-style: none;
+            }
+            .wrapper .content .sections .section ul li {
+            display: inline-block;
+            background-color: #373739;
+            border-bottom-width: 4px;
+            border-bottom-style: solid;
+            margin-right: 10px;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            }
+            .nut {
+            color: #CCCB9B;
+            border-bottom-color: #CCCB9B;
+            }
+            .soy {
+            color: #CDFD70;
+            border-bottom-color: #CDFD70;
+            }
+            .wrapper .brand {
+            background-color: #373739;
+            position: absolute;
+            top: 0;
+            right: 20px;
+            z-index: 3;
+            height: 100%;
+            width: 100px;
+            }
+            .wrapper .brand img {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            margin: 0 0 180px -50px;
+            transform: rotate(-90deg);
+            }
+    body
+        .wrapper
+            .header
+                .title
+                    span.meal-type #{meal.type}
+                    span.meal-name #{meal.title}
+            .content
+                .sections
+                    .section.left
+                        .ingredients
+                            span.title Ingredients
+                            p #{ingredients}
+                    .section.right
+                        .allergens
+                            span.title Allergens
+                            p #{allergens}
+                            ul
+                                li.allergen.nut Nut Free
+                                li.allergen.soy Soy Free
+            .brand
+                img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/logo-white.svg')

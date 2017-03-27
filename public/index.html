@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="templatePDF">
+  <head>
+    <title>OMG!</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- CDN provided-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/lib/toastr/toastr.min.css" type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <base href="/">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <form ng-submit="create(menu)">
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <label>Meal Type</label>
+                <input class="form-control" type="text" ng-model="menu.meal.type">
+              </div>
+              <div class="form-group col-xs-6">
+                <label>Meal Title</label>
+                <input class="form-control" type="text" ng-model="menu.meal.title">
+              </div>
+              <div class="form-group col-xs-6">
+                <label>Ingredients</label>
+                <textarea class="form-control" rows="4" ng-model="menu.ingredients"></textarea>
+              </div>
+              <div class="form-group col-xs-6">
+                <label>Allergens</label>
+                <textarea class="form-control" rows="4" ng-model="menu.allergens"></textarea>
+              </div>
+              <div class="col-xs-6">
+                <button class="btn btn-primary" type="submit" ng-disabled="creating"><i class="fa fa-spinner fa-spin" ng-if="creating"></i>{{ creating ? "Creating Menu..." : "Create Menu" }}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-xs-12">
+          <p class="bg-info" ng-if="downloadLink">Your download link is available <a ng-href="{{downloadLink}}" download>here</a></p>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/lib/toastr/toastr.min.js"></script>
+    <script type="text/javascript" src="/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+  </body>
+</html>

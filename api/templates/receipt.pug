@@ -1,0 +1,165 @@
+doctype html
+html
+    head
+        title Zenbox | Oh My Green
+        meta(name='HandheldFriendly', content='True')
+        meta(name='MobileOptimized', content='320')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+        style(type='text/css').
+            @font-face {
+                font-family: 'Brandon Text';
+                src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Bold.otf") format('opentype');
+                font-weight: 600;
+            }
+            @font-face {
+                font-family: 'Brandon Text';
+                src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Medium.otf") format('opentype');
+                font-weight: 500;
+            }
+            @font-face {
+                font-family: 'Brandon Text';
+                src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Regular.otf") format('opentype');
+                font-weight: 400;
+            }
+            @font-face {
+                font-family: 'Brandon Text';
+                src: url("http://zenbox.ohmygreen.com/fonts/BrandonText-Light.otf") format('opentype');
+                font-weight: 300;
+            }
+            @font-face {
+                font-family: 'Gotham Condensed';
+                src: url("http://zenbox.ohmygreen.com/fonts/GothamCondensed-Regular.otf") format('opentype');
+                font-weight: 400;
+            }
+            body {
+                font-family: "Brandon Text", sans-serif;
+                margin: 0 auto;
+                color: #222;
+            }
+            .wrapper {
+                width: 100%;
+            }
+            .header {
+                background-color: #0EAF27;
+                padding: 40px 0 0;
+                text-align: center;
+                color: #FFF;
+            }
+            .brand {
+                width: 50px;
+                height: 50px;
+            }
+            .brand img {
+                border: 3px solid #FFF;
+                border-radius: 50%;
+                height: 70px;
+                width: 70px;
+            }
+            .content {
+                margin: 0 auto;
+                width: 360px;
+                padding: 0 15px;
+            }
+            .content h1 {
+                font-weight: 500;
+                color: #FFF;
+            }
+            .order-number {
+                background-color: rgba(0,0,0,0.1);
+                padding: 10px 0;
+                text-align: left;
+            }
+            .order-number .number {
+                float: right;
+            }
+            .order-details {
+                background-color: #FFF;
+            }
+            .amount {
+                float: right;
+            }
+            .content ul {
+                padding: 0;
+                list-style: none;
+            }
+            .content ul li {
+                padding: 10px 0;
+                margin: 0;
+            }
+            .content ul li.title {
+                font-weight: 600;
+                color: #77858C;
+            }
+            .total.sub,
+            .total.all,
+            .paid-total {
+                padding: 10px 0;
+                font-weight: 600;
+            }
+            .total.plan {
+                padding: 10px 0;
+            }
+            .total {
+                color: #77858C;
+            }
+            .footer {
+                margin-top: 60px;
+            }
+            .disclaimer {
+                margin-top: 60px;
+                color: #77858C;
+                font-size: 14px;
+            }
+            .footer a {
+                color: #44AFF6;
+                text-decoration: none;
+            }
+    body
+        .wrapper
+            .header
+                .content
+                    a.brand(href='http://zenbox.ohmygreen.com', title='Zenbox | Oh My Green')
+                        img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/zenbox-logo.png')
+                    h1.total $220 at ZENBOX
+                .order-number
+                    .content
+                        span.date Today
+                        span.number #90909
+            .order-details
+                .content
+                    ul.items
+                        li.title
+                            span.desc Zenbox for 25 Employees
+
+                        li
+                            span.desc Snacks
+                            span.amount $232
+
+                    .total.sub
+                        span.desc Sub-Total
+                        span.amount $2323
+
+                    .total.plan
+                        span.desc Premium
+                        span.amount $232.50
+
+                    .total.all
+                        span.desc Total
+                        span.amount $3290
+
+                    .paid-total
+                        span.desc Paid
+                        span.amount $3290                    
+
+            .footer
+                .content
+                    p
+                        | Have a question or need help? 
+                        a(href='mailto:box@ohmygreen.com') Send us an email
+                        |  or 
+                        a(href='tel:6502654783') give us a call at (650) 265-4783
+                        | .
+                    p.disclaimer
+                        | You are receiving this email because you made a purchase at 
+                        a(href='http://zenbox.ohmygreen.com') ZENBOX
+                        | .
