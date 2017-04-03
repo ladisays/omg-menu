@@ -8,7 +8,8 @@ var pdf = require("html-pdf"),
         orientation: "landscape",
         type: "jpeg",
         quality: "100",
-        directory: "/public/files"
+        directory: "/public/files",
+        timeout: 300000
     };
 
 function reader(req, res) {
@@ -26,6 +27,8 @@ function reader(req, res) {
                 values = data.values;
 
             var links = values.map(function (value) {
+                menu = {};
+
                 return function (callback) {
                     menu = {
                         type: value[0],
@@ -38,12 +41,15 @@ function reader(req, res) {
 
                     pdf.create(template, options).toFile("./public/files/" + menu.title.toLowerCase() + ".jpeg", function (err, data) {
                         if (err) {
-                            callback(err, null);
+                            return callback(err, null);
                         }
 
-                        dir = path.parse(data.filename);
-                        
-                        callback(null, { title: menu.title, file: "/files/" + dir.base });
+                        if (data) {
+                            dir = path.parse(data.filename);
+                            return callback(null, { title: value[1], file: "/files/" + dir.base });
+                        } else {
+                            return callback(null, null);
+                        }
                     });
                 };
             });

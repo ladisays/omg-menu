@@ -3,6 +3,7 @@ module.exports = {
         "angular": true,
         "moment": true,
         "_": true,
+        "toastr": true,
         "$": true
     },
     "env": {

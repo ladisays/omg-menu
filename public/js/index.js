@@ -5,6 +5,7 @@ angular.module("templatePDF.directives", []);
 angular.module("templatePDF.controllers", []);
 
 // Load all services
+require("./services/notify");
 
 // Load all directives
 
@@ -21,19 +22,35 @@ templatePDF.config(function ($locationProvider) {
     $locationProvider.html5Mode(true);
 });
 
-templatePDF.run(function ($rootScope, $http) {
+templatePDF.run(function ($rootScope, $http, Notify) {
     $rootScope.sheet = {};
     $rootScope.submitting = false;
+    $rootScope.downloadLinks = [];
     $rootScope.submit = function (sheet) {
         $rootScope.submitting = true;
+        $rootScope.downloadLinks = [];
         $http.post("/api/convert", sheet)
         .then(function (res) {
             $rootScope.submitting = false;
             $rootScope.downloadLinks = res.data;
+            Notify.success($rootScope.downloadLinks.length > 1 ? "The files were successfully created!" : "The file was created successfully!");
             $rootScope.sheet = {};
         }, function () {
             $rootScope.submitting = false;
+            Notify.error("An error occurred during conversion. Please, try again later.");
         });
+    };
+});
+},{"./services/notify":2}],2:[function(require,module,exports){
+angular.module("templatePDF.services")
+.factory("Notify", function () {
+    return {
+        success: function (text) {
+            toastr.success(text, "Success");
+        },
+        error: function (text) {
+            toastr.error(text, "Error");
+        }
     };
 });
 },{}]},{},[1]);
