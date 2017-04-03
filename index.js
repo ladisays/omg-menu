@@ -6,7 +6,13 @@ var cookieParser = require("cookie-parser"),
     path = require("path"),
     cors = require("cors"),
     morgan = require("morgan"),
-    routingService = require("./api/routes")(router);
+    routingService = require("./api/routes")(router),
+    env = process.env.NODE_ENV || "development";
+
+if (env === "development") {
+    var dotenv = require("node-env-file");
+    dotenv(__dirname + "/.env");
+}
 
 app.use(morgan("dev"));
 app.use(cookieParser());

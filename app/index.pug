@@ -18,29 +18,23 @@ html(lang='en' ng-app='templatePDF')
     body
         .container
             .row
-                .col-xs-12
-                    form(ng-submit="create(menu)")
+                .col-xs-12.col-md-4
+                    form(ng-submit="submit(sheet)")
                         .row
                             .form-group.col-xs-6
-                                label Meal Type
-                                input.form-control(type="text" ng-model="menu.meal.type")
+                                label Start Row
+                                input.form-control(type="text" ng-model="sheet.startAt")
                             .form-group.col-xs-6
-                                label Meal Title
-                                input.form-control(type="text" ng-model="menu.meal.title")
-                            .form-group.col-xs-6
-                                label Ingredients
-                                textarea.form-control(rows="4" ng-model="menu.ingredients")
-                            .form-group.col-xs-6
-                                label Allergens
-                                textarea.form-control(rows="4" ng-model="menu.allergens")
+                                label End Row
+                                input.form-control(type="text" ng-model="sheet.endAt")
                             .col-xs-6
-                                button.btn.btn-primary(type="submit" ng-disabled="creating")
-                                    i.fa.fa-spinner.fa-spin(ng-if="creating")
-                                    | {{ creating ? "Creating Menu..." : "Create Menu" }}
+                                button.btn.btn-primary(type="submit" ng-disabled="submitting")
+                                    i.fa.fa-spinner.fa-spin(ng-if="submitting")
+                                    | {{ submitting ? "Creating Menu..." : "Create Menu" }}
                 .col-xs-12
-                    p.bg-info(ng-if="downloadLink")
-                        | Your download link is available 
-                        a(ng-href="{{downloadLink}}" download) here
+                    p.bg-info(ng-if="downloadLinks.length" ng-repeat="link in downloadLinks")
+                        | Your download link is available for 
+                        a(ng-href="{{link.file}}" download) {{ link.title }}
 
         script(type='text/javascript' src='/lib/jquery/dist/jquery.min.js')
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")

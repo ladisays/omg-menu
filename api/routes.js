@@ -8,8 +8,11 @@ function routes(router) {
         });
     });
 
-    router.route("/convert")
+    router.route("/converter")
     .post(controllers.convert.toPDF);
+
+    router.route("/convert")
+    .post(controllers.sheets.reader);
 
     router.use(function (req, res) {
         res.status(404).send({ message: "Sorry! Route not found." });

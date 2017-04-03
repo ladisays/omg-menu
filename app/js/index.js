@@ -21,18 +21,17 @@ templatePDF.config(function ($locationProvider) {
 });
 
 templatePDF.run(function ($rootScope, $http) {
-    $rootScope.menu = {};
-    $rootScope.creating = false;
-    $rootScope.create = function (menu) {
-        $rootScope.creating = true;
-        $http.post("/api/convert", menu).then(function (res) {
-            $rootScope.creating = false;
-            $rootScope.downloadLink = res.data.filename;
-            $rootScope.menu = {};
-            return;
-        }, function (err) {
-            $rootScope.creating = false;
-            return err;
+    $rootScope.sheet = {};
+    $rootScope.submitting = false;
+    $rootScope.submit = function (sheet) {
+        $rootScope.submitting = true;
+        $http.post("/api/convert", sheet)
+        .then(function (res) {
+            $rootScope.submitting = false;
+            $rootScope.downloadLinks = res.data;
+            $rootScope.sheet = {};
+        }, function () {
+            $rootScope.submitting = false;
         });
     };
 });
