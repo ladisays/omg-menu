@@ -46,7 +46,7 @@ function reader(req, res) {
 
                         if (data) {
                             dir = path.parse(data.filename);
-                            return callback(null, { title: value[1], file: "/files/" + dir.base });
+                            return callback(null, { title: value[1], file: "files/" + dir.base });
                         } else {
                             return callback(null, null);
                         }

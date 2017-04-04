@@ -21,11 +21,22 @@ templatePDF.config(function ($locationProvider) {
     $locationProvider.html5Mode(true);
 });
 
-templatePDF.run(function ($rootScope, $http, Notify) {
+templatePDF.run(function ($rootScope, $http, $location, Notify) {
+    $rootScope.host = $location.absUrl();
     $rootScope.sheet = {};
     $rootScope.submitting = false;
     $rootScope.downloadLinks = [];
     $rootScope.submit = function (sheet) {
+        if (!sheet.startAt || !sheet.endAt) {
+            Notify.error("Please, put in your values");
+            return;
+        }
+
+        if (isNaN(sheet.startAt) || isNaN(sheet.endAt)) {
+            Notify.error("You have supplied invalid values");
+            return;
+        }
+
         $rootScope.submitting = true;
         $rootScope.downloadLinks = [];
         $http.post("/api/convert", sheet)

@@ -8,9 +8,6 @@ function routes(router) {
         });
     });
 
-    router.route("/converter")
-    .post(controllers.convert.toPDF);
-
     router.route("/convert")
     .post(controllers.sheets.reader);
 

@@ -33,7 +33,7 @@
           </form>
         </div>
         <div class="col-xs-12">
-          <p class="bg-info" ng-if="downloadLinks.length" ng-repeat="link in downloadLinks">Your download link is available for <a ng-href="{{link.file}}" download>{{ link.title }}</a></p>
+          <p class="bg-info" ng-if="downloadLinks.length" ng-repeat="link in downloadLinks">Your download link is available for <a ng-href="{{host + link.file}}" download target="_self">{{ link.title }}</a></p>
         </div>
       </div>
     </div>
