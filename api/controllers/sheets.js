@@ -30,12 +30,33 @@ function reader(req, res) {
                 menu = {};
 
                 return function (callback) {
+                    var text = null;
+
                     menu = {
                         type: value[0],
-                        title: value[1],
                         ingredients: value[2],
-                        allergens: value[3]
+                        allergens: value[3],
+                        image_url: value[4],
+                        vegan: value[5],
+                        dairy: value[6],
+                        soy: value[7],
+                        wheat: value[8],
+                        nut: value[9]
                     };
+
+                    if (value[1].indexOf(":") !== -1) {
+                        text = value[1].split(":");
+                        menu.title = text[0].trim();
+                        menu.subtitle = text[1].trim();
+                    }
+                    else if (value[1].indexOf(";") !== -1) {
+                        text = value[1].split(";");
+                        menu.title = text[0].trim();
+                        menu.line_2 = text[1].trim();
+                    }
+                    else {
+                        menu.title = value[1];
+                    }
 
                     template = pug.renderFile("api/templates/menu.pug", menu);
 

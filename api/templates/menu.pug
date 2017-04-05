@@ -39,22 +39,25 @@ html
             .wrapper {
             position: relative;
             background-color: #0EAF27;
-            width: 1920px;
-            height: 1080px;
+            width: 2100px;
+            height: 1500px;
             margin: 0 auto;
-            padding: 0 20px 0 4px;
+            padding-right: 40px;
             }
             .wrapper .header {
+            display: table;
+            width: 100%;
             background-image: linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url("https://s3-us-west-2.amazonaws.com/zenbox-media/home-header@2x.jpg");
             background-image: -webkit-linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url("https://s3-us-west-2.amazonaws.com/zenbox-media/home-header@2x.jpg");
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            height: 540px;
+            height: 750px;
             }
             .wrapper .header .title {
-            padding: 60px 100px;
-            width: 55%;
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 80px 60px;
             }
             .wrapper .header .title span {
             display: block;
@@ -70,9 +73,12 @@ html
             font-weight: 300;
             line-height: 1.2;
             }
+            .wrapper .header .title .meal-name.sub {
+            font-size: 4em;
+            }
             .wrapper .content {
             background-color: #fff;
-            height: 540px;
+            height: 750px;
             position: relative;
             z-index: 2;
             }
@@ -93,18 +99,18 @@ html
             -webkit-transform: skewY(-5deg);
             }
             .wrapper .content .sections {
-            margin-right: 100px;
+            margin-right: 200px;
             }
             .wrapper .content .sections .section {
             display: inline-block;
-            padding-top: 60px;
-            padding-left: 100px;
+            padding-top: 80px;
+            padding-left: 80px;
             }
             .wrapper .content .sections .section.left {
             width: 40%;
             }
             .wrapper .content .sections .section.right {
-            width: 47%;
+            width: 50%;
             float: right;
             }
             .wrapper .content .sections .section .title {
@@ -126,8 +132,11 @@ html
             border-bottom-width: 4px;
             border-bottom-style: solid;
             margin-right: 20px;
-            padding: 20px 30px;
+            margin-bottom: 20px;
+            padding: 15px 0;
             text-transform: uppercase;
+            min-width: 250px;
+            text-align: center;
             font-size: 2em;
             }
             .nut {
@@ -138,27 +147,43 @@ html
             color: #CDFD70;
             border-bottom-color: #CDFD70;
             }
+            .vegan {
+            color: #3CCA3E;
+            border-bottom-color: #3CCA3E;
+            }
+            .dairy {
+            color: #CCC;
+            border-bottom-color: #CCC;
+            }
+            .wheat {
+            color: #FC673D;
+            border-bottom-color: #FC673D;
+            }
             .wrapper .brand {
             background-color: #373739;
             position: absolute;
             top: 0;
-            right: 20px;
+            right: 40px;
             z-index: 3;
             height: 100%;
-            width: 100px;
+            width: 200px;
             }
             .wrapper .brand img {
             position: absolute;
-            bottom: 120px;
-            left: 20px;
-            width: 60px;
+            bottom: 200px;
+            left: 50px;
+            width: 100px;
             }
     body
         .wrapper
-            .header
+            .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
                 .title
                     span.meal-type #{type}
                     span.meal-name #{title}
+                    if line_2
+                        span.meal-name #{line_2}
+                    if subtitle
+                        span.meal-name.sub #{subtitle}
             .content
                 .sections
                     .section.left
@@ -170,7 +195,15 @@ html
                             span.title Allergens
                             p #{allergens}
                             ul
-                                li.allergen.nut Nut Free
-                                li.allergen.soy Soy Free
+                                if nut && nut.toLowerCase() === "yes"
+                                    li.allergen.nut Nut Free
+                                if wheat && wheat.toLowerCase() === "yes"
+                                    li.allergen.wheat Wheat Free
+                                if soy && soy.toLowerCase() === "yes"
+                                    li.allergen.soy Soy Free
+                                if vegan && vegan.toLowerCase() === "yes"
+                                    li.allergen.vegan Vegan Free
+                                if dairy && dairy.toLowerCase() === "yes"
+                                    li.allergen.dairy Dairy Free
             .brand
                 img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/logo.png')
