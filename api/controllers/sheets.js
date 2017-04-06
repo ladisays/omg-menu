@@ -18,10 +18,10 @@ function reader(req, res) {
     sheets.spreadsheets.values.get({
         auth: process.env.GOOGLE_SHEETS_API_KEY,
         spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-        range: "Sheet1!A" + rows.startAt + ":J" + rows.endAt
+        range: rows.type === "selection" ? "Sheet1!A" + rows.startAt + ":J" + rows.endAt : "Sheet1!A2:J"
     }, function (err, data) {
         if (err) {
-            res.status(400).json(err);
+            return res.status(400).json(err);
         } else {
             var dir, menu, template,
                 values = data.values;

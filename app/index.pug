@@ -18,20 +18,25 @@ html(lang='en' ng-app='templatePDF')
     body
         .container
             .row
-                .col-xs-12.col-md-4
+                .col-xs-12.col-md-4.col-md-offset-4
                     form(ng-submit="submit(sheet)")
                         .row
-                            .form-group.col-xs-6
+                            .form-group.col-xs-12
+                                label Type
+                                select.form-control(ng-model="sheet.type")
+                                    option(value="selection") Range
+                                    option(value="all") All Rows
+                            .form-group.col-xs-6(ng-if="sheet.type === 'selection'")
                                 label Start Row
                                 input.form-control(type="text" ng-model="sheet.startAt")
-                            .form-group.col-xs-6
+                            .form-group.col-xs-6(ng-if="sheet.type === 'selection'")
                                 label End Row
                                 input.form-control(type="text" ng-model="sheet.endAt")
-                            .col-xs-6
-                                button.btn.btn-primary(type="submit" ng-disabled="submitting")
+                            .col-xs-8.col-xs-offset-2
+                                button.btn.btn-primary(type="submit" ng-disabled="submitting && sheet.type === 'selection'")
                                     i.fa.fa-spinner.fa-spin(ng-if="submitting")
                                     | {{ submitting ? "Creating Menu..." : "Create Menu" }}
-                .col-xs-12
+                .col-xs-12.col-md-4.col-md-offset-4
                     p.bg-info(ng-if="downloadLinks.length" ng-repeat="link in downloadLinks")
                         | Your download link is available for 
                         a(ng-href="{{host + link.file}}" download target="_self") {{ link.title }}

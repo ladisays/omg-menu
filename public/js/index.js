@@ -24,16 +24,18 @@ templatePDF.config(function ($locationProvider) {
 
 templatePDF.run(function ($rootScope, $http, $location, Notify) {
     $rootScope.host = $location.absUrl();
-    $rootScope.sheet = {};
+    $rootScope.sheet = {
+        type: "selection"
+    };
     $rootScope.submitting = false;
     $rootScope.downloadLinks = [];
     $rootScope.submit = function (sheet) {
-        if (!sheet.startAt || !sheet.endAt) {
+        if (sheet.type === "selection" && (!sheet.startAt || !sheet.endAt)) {
             Notify.error("Please, put in your values");
             return;
         }
 
-        if (isNaN(sheet.startAt) || isNaN(sheet.endAt)) {
+        if (sheet.type === "selection" && (isNaN(sheet.startAt) || isNaN(sheet.endAt))) {
             Notify.error("You have supplied invalid values");
             return;
         }

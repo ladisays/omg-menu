@@ -15,24 +15,31 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
           <form ng-submit="submit(sheet)">
             <div class="row">
-              <div class="form-group col-xs-6">
+              <div class="form-group col-xs-12">
+                <label>Type</label>
+                <select class="form-control" ng-model="sheet.type">
+                  <option value="selection">Range</option>
+                  <option value="all">All Rows</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-6" ng-if="sheet.type === 'selection'">
                 <label>Start Row</label>
                 <input class="form-control" type="text" ng-model="sheet.startAt">
               </div>
-              <div class="form-group col-xs-6">
+              <div class="form-group col-xs-6" ng-if="sheet.type === 'selection'">
                 <label>End Row</label>
                 <input class="form-control" type="text" ng-model="sheet.endAt">
               </div>
-              <div class="col-xs-6">
-                <button class="btn btn-primary" type="submit" ng-disabled="submitting"><i class="fa fa-spinner fa-spin" ng-if="submitting"></i>{{ submitting ? "Creating Menu..." : "Create Menu" }}</button>
+              <div class="col-xs-8 col-xs-offset-2">
+                <button class="btn btn-primary" type="submit" ng-disabled="submitting &amp;&amp; sheet.type === 'selection'"><i class="fa fa-spinner fa-spin" ng-if="submitting"></i>{{ submitting ? "Creating Menu..." : "Create Menu" }}</button>
               </div>
             </div>
           </form>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
           <p class="bg-info" ng-if="downloadLinks.length" ng-repeat="link in downloadLinks">Your download link is available for <a ng-href="{{host + link.file}}" download target="_self">{{ link.title }}</a></p>
         </div>
       </div>
