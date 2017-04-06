@@ -30,7 +30,7 @@ function reader(req, res) {
                 menu = {};
 
                 return function (callback) {
-                    var text = null;
+                    var text_arr = null;
 
                     menu = {
                         type: value[0],
@@ -45,14 +45,14 @@ function reader(req, res) {
                     };
 
                     if (value[1].indexOf(":") !== -1) {
-                        text = value[1].split(":");
-                        menu.title = text[0].trim();
-                        menu.subtitle = text[1].trim();
+                        text_arr = value[1].split(":");
+                        menu.title = text_arr[0].trim();
+                        menu.subtitle = text_arr[1].trim();
                     }
                     else if (value[1].indexOf(";") !== -1) {
-                        text = value[1].split(";");
-                        menu.title = text[0].trim();
-                        menu.line_2 = text[1].trim();
+                        text_arr = value[1].split(";");
+                        menu.title = text_arr[0].trim();
+                        menu.line_2 = text_arr[1].trim();
                     }
                     else {
                         menu.title = value[1];

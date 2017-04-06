@@ -41,12 +41,15 @@ templatePDF.run(function ($rootScope, $http, $location, Notify) {
 
         $rootScope.submitting = true;
         $rootScope.downloadLinks = [];
+        
         $http.post("/api/convert", sheet)
         .then(function (res) {
             $rootScope.submitting = false;
             $rootScope.downloadLinks = res.data;
             Notify.success($rootScope.downloadLinks.length > 1 ? "The files were successfully created!" : "The file was created successfully!");
-            $rootScope.sheet = {};
+            $rootScope.sheet = {
+                type: "selection"
+            };
         }, function () {
             $rootScope.submitting = false;
             Notify.error("An error occurred during conversion. Please, try again later.");
