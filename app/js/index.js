@@ -24,7 +24,8 @@ templatePDF.config(function ($locationProvider) {
 templatePDF.run(function ($rootScope, $http, $location, Notify) {
     $rootScope.host = $location.absUrl();
     $rootScope.sheet = {
-        type: "selection"
+        type: "selection",
+        catering: "dressing"
     };
     $rootScope.submitting = false;
     $rootScope.downloadLinks = [];
@@ -48,7 +49,8 @@ templatePDF.run(function ($rootScope, $http, $location, Notify) {
             $rootScope.downloadLinks = res.data;
             Notify.success($rootScope.downloadLinks.length > 1 ? "The files were successfully created!" : "The file was created successfully!");
             $rootScope.sheet = {
-                type: "selection"
+                type: "selection",
+                catering: "dressing"
             };
         }, function () {
             $rootScope.submitting = false;

@@ -13,13 +13,14 @@ var pdf = require("html-pdf"),
     };
 
 function reader(req, res) {
-    var rows = req.body;
+    var rows = req.body,
+        Auth = {
+            auth: process.env.GOOGLE_SHEETS_API_KEY,
+            spreadsheetId: process.env[rows.catering.toUpperCase() + "_GOOGLE_SHEETS_ID"],
+            range: rows.type === "selection" ? "Sheet1!A" + rows.startAt + ":M" + rows.endAt : "Sheet1!A2:M"
+        };
 
-    sheets.spreadsheets.values.get({
-        auth: process.env.GOOGLE_SHEETS_API_KEY,
-        spreadsheetId: process.env.GOOGLE_SHEETS_ID,
-        range: rows.type === "selection" ? "Sheet1!A" + rows.startAt + ":J" + rows.endAt : "Sheet1!A2:J"
-    }, function (err, data) {
+    sheets.spreadsheets.values.get(Auth, function (err, data) {
         if (err) {
             return res.status(400).json(err);
         } else {
@@ -32,30 +33,49 @@ function reader(req, res) {
                 return function (callback) {
                     var text_arr = null;
 
-                    menu = {
-                        type: value[0],
-                        ingredients: value[2],
-                        allergens: value[3],
-                        image_url: value[4],
-                        vegan: value[5],
-                        dairy: value[6],
-                        soy: value[7],
-                        wheat: value[8],
-                        nut: value[9]
-                    };
+                    if (rows.catering !== "menu") {
+                        menu = {                            
+                            ingredients: value[2],
+                            allergens: value[3],
+                            image_url: value[4],
+                            vegan: value[5],
+                            dairy: value[6],
+                            soy: value[7],
+                            wheat: value[8],
+                            nut: value[9],
+                            gluten: value[10],
+                            paleo: value[11],
+                            egg: value[12]
+                        };
 
-                    if (value[1].indexOf(":") !== -1) {
-                        text_arr = value[1].split(":");
-                        menu.title = text_arr[0].trim();
-                        menu.subtitle = text_arr[1].trim();
-                    }
-                    else if (value[1].indexOf(";") !== -1) {
-                        text_arr = value[1].split(";");
-                        menu.title = text_arr[0].trim();
-                        menu.line_2 = text_arr[1].trim();
-                    }
-                    else {
-                        menu.title = value[1];
+                        if (rows.catering === "label") {
+                            menu.type = value[0];
+
+                            if (value[1].indexOf(":") !== -1) {
+                                text_arr = value[1].split(":");
+                                menu.title = text_arr[0].trim();
+                                menu.subtitle = text_arr[1].trim();
+                            }
+                            else if (value[1].indexOf(";") !== -1) {
+                                text_arr = value[1].split(";");
+                                menu.title = text_arr[0].trim();
+                                menu.line_2 = text_arr[1].trim();
+                            }
+                            else {
+                                menu.title = value[1];
+                            }
+                        } else {
+                            menu.subtitle = value[1];
+
+                            if (value[0].indexOf(";") !== -1) {
+                                text_arr = value[0].split(";");
+                                menu.title = text_arr[0].trim();
+                                menu.line_2 = text_arr[1].trim();
+                            }
+                            else {
+                                menu.title = value[1];
+                            }
+                        }
                     }
 
                     template = pug.renderFile("api/templates/menu.pug", menu);

@@ -22,7 +22,13 @@ html(lang='en' ng-app='templatePDF')
                     form(ng-submit="submit(sheet)")
                         .row
                             .form-group.col-xs-12
-                                label Type
+                                label Catering Type
+                                select.form-control(ng-model="sheet.catering")
+                                    option(value="dressing") Dressing
+                                    option(value="label") Label
+                                    option(value="menu") Menu
+                            .form-group.col-xs-12
+                                label Selection Type
                                 select.form-control(ng-model="sheet.type")
                                     option(value="selection") Range
                                     option(value="all") All Rows

@@ -19,7 +19,15 @@
           <form ng-submit="submit(sheet)">
             <div class="row">
               <div class="form-group col-xs-12">
-                <label>Type</label>
+                <label>Catering Type</label>
+                <select class="form-control" ng-model="sheet.catering">
+                  <option value="dressing">Dressing</option>
+                  <option value="label">Label</option>
+                  <option value="menu">Menu</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-12">
+                <label>Selection Type</label>
                 <select class="form-control" ng-model="sheet.type">
                   <option value="selection">Range</option>
                   <option value="all">All Rows</option>

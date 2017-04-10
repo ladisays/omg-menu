@@ -39,7 +39,7 @@ html
             .wrapper {
             position: relative;
             background-color: #0EAF27;
-            width: 2100px;
+            width: 2060px;
             height: 1500px;
             margin: 0 auto;
             padding-right: 40px;
@@ -100,18 +100,21 @@ html
             }
             .wrapper .content .sections {
             margin-right: 200px;
-            }
-            .wrapper .content .sections .section {
-            display: inline-block;
             padding-top: 80px;
             padding-left: 80px;
             }
+            .wrapper .content .sections .section {
+            display: inline-block;
+            float: left;
+            }
             .wrapper .content .sections .section.left {
-            width: 40%;
+            width: 43%;
             }
             .wrapper .content .sections .section.right {
-            width: 50%;
-            float: right;
+            margin-left: 80px;
+            padding-left: 80px;
+            border-left: 1px solid #ccc;
+            width: 47%;
             }
             .wrapper .content .sections .section .title {
             font-size: 3em;
@@ -129,7 +132,7 @@ html
             .wrapper .content .sections .section ul li {
             display: inline-block;
             background-color: #373739;
-            border-bottom-width: 4px;
+            border-bottom-width: 8px;
             border-bottom-style: solid;
             margin-right: 20px;
             margin-bottom: 20px;
@@ -137,7 +140,7 @@ html
             text-transform: uppercase;
             min-width: 250px;
             text-align: center;
-            font-size: 2em;
+            font-size: 1.75em;
             }
             .nut {
             color: #CCCB9B;
@@ -159,6 +162,18 @@ html
             color: #FC673D;
             border-bottom-color: #FC673D;
             }
+            .gluten {
+            color: #FFFD71;
+            border-bottom-color: #FFFD71;
+            }
+            .paleo {
+            color: #FC0D1B;
+            border-bottom-color: #FC0D1B;
+            }
+            .egg {
+            color: #FDBF2D;
+            border-bottom-color: #FDBF2D;
+            }
             .wrapper .brand {
             background-color: #373739;
             position: absolute;
@@ -170,7 +185,7 @@ html
             }
             .wrapper .brand img {
             position: absolute;
-            bottom: 200px;
+            bottom: 300px;
             left: 50px;
             width: 100px;
             }
@@ -178,7 +193,8 @@ html
         .wrapper
             .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
                 .title
-                    span.meal-type #{type}
+                    if type
+                        span.meal-type #{type}
                     span.meal-name #{title}
                     if line_2
                         span.meal-name #{line_2}
@@ -192,18 +208,25 @@ html
                             p #{ingredients}
                     .section.right
                         .allergens
-                            span.title Allergens
+                            if catering === "label"
+                                span.title Allergens
                             p #{allergens}
                             ul
-                                if nut && nut.toLowerCase() === "yes"
+                                if nut && nut.toLowerCase() === "x"
                                     li.allergen.nut Nut Free
-                                if wheat && wheat.toLowerCase() === "yes"
+                                if wheat && wheat.toLowerCase() === "x"
                                     li.allergen.wheat Wheat Free
-                                if soy && soy.toLowerCase() === "yes"
+                                if soy && soy.toLowerCase() === "x"
                                     li.allergen.soy Soy Free
-                                if vegan && vegan.toLowerCase() === "yes"
-                                    li.allergen.vegan Vegan Free
-                                if dairy && dairy.toLowerCase() === "yes"
+                                if vegan && vegan.toLowerCase() === "x"
+                                    li.allergen.vegan Vegetarian
+                                if dairy && dairy.toLowerCase() === "x"
                                     li.allergen.dairy Dairy Free
+                                if gluten && gluten.toLowerCase() === "x"
+                                    li.allergen.gluten Gluten Free
+                                if paleo && paleo.toLowerCase() === "x"
+                                    li.allergen.paleo Paleo
+                                if egg && egg.toLowerCase() === "x"
+                                    li.allergen.egg Egg Free
             .brand
                 img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
