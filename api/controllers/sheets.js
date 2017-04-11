@@ -116,7 +116,6 @@ function reader(req, res) {
 
                     menu.template = rows.catering;
 
-                    console.log(menu);
                     file = rows.catering === "menu" ? menu.theme.toLowerCase() : menu.title.toLowerCase();
 
                     template = pug.renderFile("api/templates/menu.pug", menu);
