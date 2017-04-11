@@ -24,11 +24,12 @@ function reader(req, res) {
         if (err) {
             return res.status(400).json(err);
         } else {
-            var dir, menu, template,
+            var dir, menu, template, file,
                 values = data.values;
 
             var links = values.map(function (value) {
                 menu = {};
+                file = null;
 
                 return function (callback) {
                     var text_arr = null;
@@ -77,10 +78,50 @@ function reader(req, res) {
                             }
                         }
                     }
+                    else {
+                        var i, item = {};
+
+                        menu = {
+                            day: value[0],
+                            description: value[2],
+                            image_url: value[3],
+                            items: []
+                        };
+
+                        if (value[1].indexOf(";") !== -1) {
+                            text_arr = value[1].split(";");
+                            menu.theme = text_arr[0].trim();
+                            menu.line_2 = text_arr[1].trim();
+                        }
+                        else {
+                            menu.theme = value[1];
+                        }
+
+                        for (i = 4; i < value.length; i++) {
+                            if (value[i].indexOf(":") !== -1) {
+                                text_arr = value[i].split(":");
+                                item.title = text_arr[0].trim();
+                                item.detail = text_arr[1].trim();
+                            }
+                            else {
+                                item = {
+                                    title: value[i],
+                                    detail: ""
+                                };
+                            }
+
+                            menu.items.push(item);
+                        }
+                    }
+
+                    menu.template = rows.catering;
+
+                    console.log(menu);
+                    file = rows.catering === "menu" ? menu.theme.toLowerCase() : menu.title.toLowerCase();
 
                     template = pug.renderFile("api/templates/menu.pug", menu);
 
-                    pdf.create(template, options).toFile("./public/files/" + menu.title.toLowerCase() + ".jpeg", function (err, data) {
+                    pdf.create(template, options).toFile("./public/files/" + file + ".jpeg", function (err, data) {
                         if (err) {
                             return callback(err, null);
                         }

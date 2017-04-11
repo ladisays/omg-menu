@@ -36,7 +36,7 @@ html
             color: #222;
             margin: 0;
             }
-            .wrapper {
+            .wrapper, .wrapper-menu {
             position: relative;
             background-color: #0EAF27;
             width: 2060px;
@@ -44,7 +44,7 @@ html
             margin: 0 auto;
             padding-right: 40px;
             }
-            .wrapper .header {
+            .header {
             display: table;
             width: 100%;
             background-image: linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url("https://s3-us-west-2.amazonaws.com/zenbox-media/home-header@2x.jpg");
@@ -54,35 +54,37 @@ html
             background-size: cover;
             height: 750px;
             }
-            .wrapper .header .title {
+            .header .title {
             display: table-cell;
             vertical-align: middle;
             padding: 0 220px 60px 80px;
             }
-            .wrapper .header .title span {
+            .header .title span {
             display: block;
             color: #FFF;
             text-transform: uppercase;
             }
-            .wrapper .header .title .meal-type {
+            .header .title .meal-type,
+            .header .title .day {
             font-size: 3em;
             font-weight: 600;
             }
-            .wrapper .header .title .meal-name {
+            .header .title .meal-name,
+            .header .title .theme {
             font-size: 8em;
             font-weight: 300;
             line-height: 1.2;
             }
-            .wrapper .header .title .meal-name.sub {
+            .header .title .meal-name.sub {
             font-size: 4em;
             }
-            .wrapper .content {
+            .content {
             background-color: #fff;
             height: 750px;
             position: relative;
             z-index: 2;
             }
-            .wrapper .content:before {
+            .content:before {
             background: inherit;
             content: '';
             display: block;
@@ -98,38 +100,38 @@ html
             -webkit-transform-origin: 0;
             -webkit-transform: skewY(-5deg);
             }
-            .wrapper .content .sections {
+            .content .sections {
             margin-right: 200px;
             padding-top: 80px;
             padding-left: 80px;
             }
-            .wrapper .content .sections .section {
+            .content .sections .section {
             display: inline-block;
             float: left;
             }
-            .wrapper .content .sections .section.left {
+            .content .sections .section.left {
             width: 43%;
             }
-            .wrapper .content .sections .section.right {
+            .content .sections .section.right {
             margin-left: 80px;
             padding-left: 80px;
             border-left: 1px solid #ccc;
             width: 47%;
             }
-            .wrapper .content .sections .section .title {
+            .content .sections .section .title {
             font-size: 3em;
             text-transform: uppercase;
             font-weight: 600;
             }
-            .wrapper .content .sections .section p {
+            .content .sections .section p {
             font-size: 36px;
             font-weight: 400;
             }
-            .wrapper .content .sections .section ul {
+            .content .sections .section ul {
             padding: 0;
             list-style: none;
             }
-            .wrapper .content .sections .section ul li {
+            .content .sections .section ul li {
             display: inline-block;
             background-color: #373739;
             border-bottom-width: 8px;
@@ -174,7 +176,7 @@ html
             color: #FDBF2D;
             border-bottom-color: #FDBF2D;
             }
-            .wrapper .brand {
+            .brand {
             background-color: #373739;
             position: absolute;
             top: 0;
@@ -183,50 +185,110 @@ html
             height: 100%;
             width: 200px;
             }
-            .wrapper .brand img {
+            .brand img {
             position: absolute;
             bottom: 300px;
             left: 50px;
             width: 100px;
             }
+            .wrapper-menu {
+            width: 2060px;
+            height: 3000px;
+            }
+            .wrapper-menu .header .title {
+            padding-right: 200px;
+            }
+            .wrapper-menu .header .title .description {
+            font-weight: 300;
+            font-size: 3em;
+            text-transform: none;
+            }
+            .wrapper-menu .content {
+            padding: 80px 200px 0 80px;
+            padding-right: 200px;
+            height: 2170px;
+            }
+            .list-items {
+            list-style: none;
+            padding: 0;
+            }
+            .list-items li {
+            margin-bottom: 80px;
+            }
+            .list-items li span {
+            display: block;
+            }
+            .list-items li .top {
+            font-size: 3em;
+            font-weight: 600;
+            text-transform: uppercase;
+            }
+            .list-items li .detail {
+            font-size: 2em;
+            font-style: italic;
+            }
     body
-        .wrapper
-            .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
-                .title
-                    if type
-                        span.meal-type #{type}
-                    span.meal-name #{title}
-                    if line_2
-                        span.meal-name #{line_2}
-                    if subtitle
-                        span.meal-name.sub #{subtitle}
-            .content
-                .sections
-                    .section.left
-                        .ingredients
-                            span.title Ingredients
-                            p #{ingredients}
-                    .section.right
-                        .allergens
-                            if catering === "label"
-                                span.title Allergens
-                            p #{allergens}
-                            ul
-                                if nut && nut.toLowerCase() === "x"
-                                    li.allergen.nut Nut Free
-                                if wheat && wheat.toLowerCase() === "x"
-                                    li.allergen.wheat Wheat Free
-                                if soy && soy.toLowerCase() === "x"
-                                    li.allergen.soy Soy Free
-                                if vegan && vegan.toLowerCase() === "x"
-                                    li.allergen.vegan Vegetarian
-                                if dairy && dairy.toLowerCase() === "x"
-                                    li.allergen.dairy Dairy Free
-                                if gluten && gluten.toLowerCase() === "x"
-                                    li.allergen.gluten Gluten Free
-                                if paleo && paleo.toLowerCase() === "x"
-                                    li.allergen.paleo Paleo
-                                if egg && egg.toLowerCase() === "x"
-                                    li.allergen.egg Egg Free
-            .brand
-                img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
+        if template === "menu"
+            .wrapper-menu
+                .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
+                    .title
+                        if day
+                            span.day #{day}
+                        span.theme #{theme}
+                        if line_2
+                            span.theme #{line_2}
+                        if description
+                            span.description #{description}
+
+                .content
+                    ul.list-items
+                        each item in items
+                            li
+                                span.top= item.title
+                                
+                                if item.detail
+                                    span.detail= item.detail
+
+                .brand
+                    img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
+        else
+            .wrapper
+                .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
+                    .title
+                        if type
+                            span.meal-type #{type}
+                        span.meal-name #{title}
+                        if line_2
+                            span.meal-name #{line_2}
+                        if subtitle
+                            span.meal-name.sub #{subtitle}
+                .content
+                    .sections
+                        .section.left
+                            .ingredients
+                                span.title Ingredients
+                                p #{ingredients}
+                        .section.right
+                            .allergens
+                                if catering === "label"
+                                    span.title Allergens
+                                p #{allergens}
+                                ul
+                                    if nut && nut.toLowerCase() === "x"
+                                        li.allergen.nut Nut Free
+                                    if wheat && wheat.toLowerCase() === "x"
+                                        li.allergen.wheat Wheat Free
+                                    if soy && soy.toLowerCase() === "x"
+                                        li.allergen.soy Soy Free
+                                    if vegan && vegan.toLowerCase() === "x"
+                                        li.allergen.vegan Vegetarian
+                                    if dairy && dairy.toLowerCase() === "x"
+                                        li.allergen.dairy Dairy Free
+                                    if gluten && gluten.toLowerCase() === "x"
+                                        li.allergen.gluten Gluten Free
+                                    if paleo && paleo.toLowerCase() === "x"
+                                        li.allergen.paleo Paleo
+                                    if egg && egg.toLowerCase() === "x"
+                                        li.allergen.egg Egg Free
+                .brand
+                    img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')

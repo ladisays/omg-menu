@@ -30,14 +30,16 @@ templatePDF.run(function ($rootScope, $http, $location, Notify) {
     $rootScope.submitting = false;
     $rootScope.downloadLinks = [];
     $rootScope.submit = function (sheet) {
-        if (sheet.type === "selection" && (!sheet.startAt || !sheet.endAt)) {
-            Notify.error("Please, put in your values");
-            return;
-        }
-
-        if (sheet.type === "selection" && (isNaN(sheet.startAt) || isNaN(sheet.endAt))) {
-            Notify.error("You have supplied invalid values");
-            return;
+        if (sheet.type === "selection") {
+            if (!sheet.startAt || !sheet.endAt) {
+                Notify.error("Please, put in your values");
+                return;
+            }
+            
+            if (isNaN(sheet.startAt) || isNaN(sheet.endAt)) {
+                Notify.error("You have supplied invalid values");
+                return;
+            }
         }
 
         $rootScope.submitting = true;
