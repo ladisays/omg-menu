@@ -13,12 +13,34 @@ var pdf = require("html-pdf"),
     };
 
 function reader(req, res) {
-    var rows = req.body,
+    var sheet, rows = req.body,
         Auth = {
             auth: process.env.GOOGLE_SHEETS_API_KEY,
-            spreadsheetId: process.env[rows.catering.toUpperCase() + "_GOOGLE_SHEETS_ID"],
-            range: rows.type === "selection" ? "Sheet1!A" + rows.startAt + ":M" + rows.endAt : "Sheet1!A2:M"
+            spreadsheetId: process.env.GOOGLE_SHEETS_ID,
         };
+    
+    if (rows.catering === "menu") {
+        sheet = "Menus for Printing";
+    }
+
+    else if (rows.catering === "label") {
+        sheet = "Dishes";
+    }
+
+    else if (rows.catering === "dressing") {
+        sheet = "Dressings";
+    }
+
+    else {
+        sheet = "";
+    }
+
+    if (rows.type === "selection") {
+        Auth.range = sheet + "!C" + rows.startAt + ":P" + rows.endAt;
+    }
+    else {
+        Auth.range = sheet + "!C2:P";
+    }
 
     sheets.spreadsheets.values.get(Auth, function (err, data) {
         if (err) {
