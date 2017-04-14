@@ -192,8 +192,11 @@ html
             width: 100px;
             }
             .wrapper-menu {
-            width: 2060px;
-            height: 3000px;
+            width: 2295px;
+            height: 3045px;
+            }
+            .wrapper-menu .header {
+            height: 795px;
             }
             .wrapper-menu .header .title {
             padding-right: 200px;
@@ -207,6 +210,35 @@ html
             padding: 80px 200px 0 80px;
             padding-right: 200px;
             height: 2170px;
+            }
+            .large {
+            width: 2510px;
+            height: 3300px;
+            }
+            .large .header {
+            height: 1050px;
+            }
+            .large .header .title .theme {
+            font-size: 10em;
+            }
+            .large .header .title .description,
+            .large .heade .title .day {
+            font-size: 4em;
+            }
+            .large .content,
+            .large .header .title {
+            padding-left: 160px;
+            }
+            .large .content {
+            padding-top: 160px;
+            padding-right: 280px;
+            height: 2090px;
+            }
+            .large .content .list-items li .top {
+            font-size: 4em;
+            }
+            .large .content .list-items li .detail {
+            font-size: 3em;
             }
             .list-items {
             list-style: none;
@@ -227,9 +259,51 @@ html
             font-size: 2em;
             font-style: italic;
             }
+            .dressings {
+            width: 1460px;
+            height: 1050px;
+            }
+            .dressings .header,
+            .dressings .content {
+            height: 525px;
+            }
+            .dressings .header .meal-name {
+            font-size: 6em;
+            }
+            .dressings .header .meal-name.sub {
+            font-size: 2.5em;
+            }
+            .dressings .content .sections {
+            margin-right: 80px;
+            }
+            .dressings .content .sections .section.right {
+            width: 43%;
+            }
+            .dressings .content .sections .section .title {
+            font-size: 2em;
+            }
+            .dressings .content .sections .section p {
+            font-size: 1.5em;
+            }
+            .dressings .content .sections .section ul li {
+            padding: 7.5px 0;
+            font-size: 1.5em;
+            min-width: 200px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            }
+            .dressings .brand {
+            right: 20px;
+            width: 100px;
+            }
+            .dressings .brand img {
+            width: 50px;
+            left: 25px;
+            bottom: 100px;
+            }
     body
-        if template === "menu"
-            .wrapper-menu
+        if template.indexOf("menu") !== -1
+            .wrapper-menu(class={large: template === "menu-large"})
                 .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
                     .title
                         if day
@@ -252,7 +326,7 @@ html
                 .brand
                     img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
         else
-            .wrapper
+            .wrapper(class={dressings: template === "dressing"})
                 .header(style={"background-image": "linear-gradient(to right, rgb(0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)), url('" + image_url + "')"})
                     .title
                         if type

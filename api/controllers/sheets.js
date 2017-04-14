@@ -19,16 +19,20 @@ function reader(req, res) {
             spreadsheetId: process.env.GOOGLE_SHEETS_ID,
         };
     
-    if (rows.catering === "menu") {
+    if (rows.catering.indexOf("menu") !== -1) {
         sheet = "Menus for Printing";
     }
 
-    else if (rows.catering === "label") {
+    else if (rows.catering === "dish") {
         sheet = "Dishes";
     }
 
     else if (rows.catering === "dressing") {
         sheet = "Dressings";
+    }
+
+    else if (rows.catering === "topping") {
+        sheet = "Toppings";
     }
 
     else {
@@ -56,11 +60,11 @@ function reader(req, res) {
                 return function (callback) {
                     var text_arr = null;
 
-                    if (rows.catering !== "menu") {
+                    if (rows.catering === "dish" || rows.catering === "dressing") {
                         menu = {                            
                             ingredients: value[2],
                             allergens: value[3],
-                            image_url: value[4],
+                            image_url: value[4] || "https://s3-us-west-2.amazonaws.com/zenbox-media/_default_menu.jpg",
                             vegan: value[5],
                             dairy: value[6],
                             soy: value[7],
@@ -71,7 +75,7 @@ function reader(req, res) {
                             egg: value[12]
                         };
 
-                        if (rows.catering === "label") {
+                        if (rows.catering === "dish") {
                             menu.type = value[0];
 
                             if (value[1].indexOf(":") !== -1) {
@@ -138,7 +142,7 @@ function reader(req, res) {
 
                     menu.template = rows.catering;
 
-                    file = rows.catering === "menu" ? menu.theme.toLowerCase() : menu.title.toLowerCase();
+                    file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase() : menu.title.toLowerCase();
 
                     template = pug.renderFile("api/templates/menu.pug", menu);
 
