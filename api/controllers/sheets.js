@@ -148,8 +148,6 @@ function reader(req, res) {
 
                     file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase() : menu.title.toLowerCase();
 
-                    file = encodeURIComponent(file);
-
                     template = pug.renderFile("api/templates/menu.pug", menu);
 
                     pdf.create(template, options).toFile("./public/files/" + file + ".jpeg", function (err, data) {
