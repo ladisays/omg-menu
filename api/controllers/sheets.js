@@ -58,6 +58,10 @@ function reader(req, res) {
                 file = null;
 
                 return function (callback) {
+                    if (!value[0] || !value[1] || !value[2]) {
+                        return callback(null, null);
+                    }
+
                     var text_arr = null;
 
                     if (rows.catering === "dish" || rows.catering === "dressing") {
@@ -110,7 +114,7 @@ function reader(req, res) {
                         menu = {
                             day: value[0],
                             description: value[2],
-                            image_url: value[3],
+                            image_url: value[3] || "https://s3-us-west-2.amazonaws.com/zenbox-media/_default_menu.jpg",
                             items: []
                         };
 
@@ -144,6 +148,8 @@ function reader(req, res) {
 
                     file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase() : menu.title.toLowerCase();
 
+                    file = encodeURIComponent(file);
+
                     template = pug.renderFile("api/templates/menu.pug", menu);
 
                     pdf.create(template, options).toFile("./public/files/" + file + ".jpeg", function (err, data) {
@@ -165,6 +171,10 @@ function reader(req, res) {
                 if (err) {
                     return res.status(400).json(err);
                 }
+                result = result.filter(function (link) {
+                    return link !== null;
+                });
+
                 return res.status(200).json(result);
             });
         }
