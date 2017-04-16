@@ -54,9 +54,9 @@ templatePDF.run(function ($rootScope, $http, $location, Notify) {
                 type: "selection",
                 catering: "dressing"
             };
-        }, function () {
+        }, function (err) {
             $rootScope.submitting = false;
-            Notify.error("An error occurred during conversion. Please, try again later.");
+            Notify.error(err.data.message || "An error occurred during conversion. Please, try again later.");
         });
     };
 });

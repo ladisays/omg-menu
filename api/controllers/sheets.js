@@ -50,12 +50,12 @@ function reader(req, res) {
         if (err) {
             return res.status(400).json(err);
         } else {
+            if (!data.values || !data.values.length) {
+                return res.status(404).json({ message: "No values were returned! "});
+            }
+
             var dir, menu, template, file,
                 values = data.values;
-
-            if (!values.length) {
-                return res.status(404).json({});
-            }
 
             var links = values.map(function (value) {
                 menu = {};
