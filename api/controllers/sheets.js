@@ -58,13 +58,13 @@ function reader(req, res) {
                 file = null;
 
                 return function (callback) {
-                    if (!value[0] || !value[1] || !value[2]) {
-                        return callback(null, null);
-                    }
-
                     var text_arr = null;
 
                     if (rows.catering === "dish" || rows.catering === "dressing") {
+                        if (!value[0] || !value[1] || !value[2]) {
+                            return callback(null, null);
+                        }
+
                         menu = {                            
                             ingredients: value[2],
                             allergens: value[3],
@@ -84,50 +84,56 @@ function reader(req, res) {
 
                             if (value[1].indexOf(":") !== -1) {
                                 text_arr = value[1].split(":");
-                                menu.title = text_arr[0].trim();
+                                menu.title = text_arr[0].trim().replace("/","_");
                                 menu.subtitle = text_arr[1].trim();
                             }
                             else if (value[1].indexOf(";") !== -1) {
                                 text_arr = value[1].split(";");
-                                menu.title = text_arr[0].trim();
+                                menu.title = text_arr[0].trim().replace("/","_");
                                 menu.line_2 = text_arr[1].trim();
                             }
                             else {
-                                menu.title = value[1];
+                                menu.title = value[1].replace("/","_");
                             }
                         } else {
                             menu.subtitle = value[1];
 
                             if (value[0].indexOf(";") !== -1) {
                                 text_arr = value[0].split(";");
-                                menu.title = text_arr[0].trim();
+                                menu.title = text_arr[0].trim().replace("/","_");
                                 menu.line_2 = text_arr[1].trim();
                             }
                             else {
-                                menu.title = value[1];
+                                menu.title = value[1].replace("/","_");
                             }
                         }
                     }
                     else {
+                        if (!value[0] || !value[1] || !value[4] || !value[5]) {
+                            return callback(null, null);
+                        }
+
                         var i, item = {};
 
                         menu = {
                             day: value[0],
                             description: value[2],
                             image_url: value[3] || "https://s3-us-west-2.amazonaws.com/zenbox-media/_default_menu.jpg",
-                            items: []
+                            entree: value[4],
+                            veg_entree: value[5],
+                            sides: []
                         };
 
                         if (value[1].indexOf(";") !== -1) {
                             text_arr = value[1].split(";");
-                            menu.theme = text_arr[0].trim();
+                            menu.theme = text_arr[0].trim().replace("/","_");
                             menu.line_2 = text_arr[1].trim();
                         }
                         else {
-                            menu.theme = value[1];
+                            menu.theme = value[1].replace("/","_");
                         }
 
-                        for (i = 4; i < value.length; i++) {
+                        for (i = 6; i < value.length; i++) {
                             if (value[i].indexOf(":") !== -1) {
                                 text_arr = value[i].split(":");
                                 item.title = text_arr[0].trim();
@@ -140,7 +146,7 @@ function reader(req, res) {
                                 };
                             }
 
-                            menu.items.push(item);
+                            menu.sides.push(item);
                         }
                     }
 

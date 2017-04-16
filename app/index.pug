@@ -44,6 +44,7 @@ html(lang='en' ng-app='templatePDF')
                                     i.fa.fa-spinner.fa-spin(ng-if="submitting")
                                     | {{ submitting ? "Creating Menu..." : "Create Menu" }}
                 .col-xs-12.col-md-4.col-md-offset-4
+                    p.bg-info(ng-if="downloadLinks.length") When printing, scale the JPEG image down to 24% to print at the right size
                     p.bg-info(ng-if="downloadLinks.length" ng-repeat="link in downloadLinks")
                         | Your download link is available for 
                         a(ng-href="{{host + link.file}}" download="{{link.title + '.jpeg'}}" target="_self") {{ link.title }}

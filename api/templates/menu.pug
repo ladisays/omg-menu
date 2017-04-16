@@ -35,6 +35,7 @@ html
             font-family: "Brandon Text", sans-serif;
             color: #222;
             margin: 0;
+            font-size: 16px;
             }
             .wrapper, .wrapper-menu {
             position: relative;
@@ -66,17 +67,17 @@ html
             }
             .header .title .meal-type,
             .header .title .day {
-            font-size: 3em;
+            font-size: 2.75em;
             font-weight: 600;
             }
             .header .title .meal-name,
             .header .title .theme {
-            font-size: 8em;
+            font-size: 9.375em;
             font-weight: 300;
             line-height: 1.2;
             }
             .header .title .meal-name.sub {
-            font-size: 4em;
+            font-size: 5em;
             }
             .content {
             background-color: #fff;
@@ -119,15 +120,16 @@ html
             width: 47%;
             }
             .content .sections .section .title {
-            font-size: 3em;
+            font-size: 2.75em;
             text-transform: uppercase;
             font-weight: 600;
             }
             .content .sections .section p {
-            font-size: 36px;
-            font-weight: 400;
+            font-size: 3em;
+            font-weight: 300;
             }
             .content .sections .section ul {
+            margin: 0;
             padding: 0;
             list-style: none;
             }
@@ -142,7 +144,8 @@ html
             text-transform: uppercase;
             min-width: 250px;
             text-align: center;
-            font-size: 1.75em;
+            font-size: 2em;
+            font-weight: 500;
             }
             .nut {
             color: #CCCB9B;
@@ -180,15 +183,15 @@ html
             background-color: #373739;
             position: absolute;
             top: 0;
-            right: 40px;
+            right: 30px;
             z-index: 3;
             height: 100%;
-            width: 200px;
+            width: 220px;
             }
             .brand img {
             position: absolute;
-            bottom: 300px;
-            left: 50px;
+            bottom: 160px;
+            left: 60px;
             width: 100px;
             }
             .wrapper-menu {
@@ -199,17 +202,41 @@ html
             height: 795px;
             }
             .wrapper-menu .header .title {
+            padding-left: 160px;
             padding-right: 200px;
             }
+            .wrapper-menu .header .title .day {
+            font-size: 5.5em;
+            }
+            .wrapper-menu .header .title .theme {
+            font-size: 11em;
+            }
             .wrapper-menu .header .title .description {
-            font-weight: 300;
-            font-size: 3em;
+            font-weight: 400;
+            font-size: 4.5em;
             text-transform: none;
             }
             .wrapper-menu .content {
-            padding: 80px 200px 0 80px;
+            padding: 160px 280px 0 160px;
             padding-right: 200px;
-            height: 2170px;
+            height: 2090px;
+            }
+            .wrapper-menu .entree,
+            .wrapper-menu .veg-entree {
+            margin-bottom: 80px;
+            }
+            .wrapper-menu .content .entree span,
+            .wrapper-menu .content .veg-entree span {
+            display: block;
+            font-size: 5em;
+            font-weight: 400;
+            text-transform: uppercase;
+            }
+            .wrapper-menu .content span.head {
+            font-size: 4em;
+            font-weight: 500;
+            color: #0EAF27;
+            text-transform: uppercase;
             }
             .large {
             width: 2510px;
@@ -218,27 +245,14 @@ html
             .large .header {
             height: 1050px;
             }
+            .large .header .title .day {
+            font-size: 6em;
+            }
             .large .header .title .theme {
-            font-size: 10em;
+            font-size: 12em;
             }
-            .large .header .title .description,
-            .large .heade .title .day {
-            font-size: 4em;
-            }
-            .large .content,
-            .large .header .title {
-            padding-left: 160px;
-            }
-            .large .content {
-            padding-top: 160px;
-            padding-right: 280px;
-            height: 2090px;
-            }
-            .large .content .list-items li .top {
-            font-size: 4em;
-            }
-            .large .content .list-items li .detail {
-            font-size: 3em;
+            .large .header .title .description {
+            font-size: 4.5em;
             }
             .list-items {
             list-style: none;
@@ -251,12 +265,12 @@ html
             display: block;
             }
             .list-items li .top {
-            font-size: 3em;
-            font-weight: 600;
+            font-size: 5em;
+            font-weight: 400;
             text-transform: uppercase;
             }
             .list-items li .detail {
-            font-size: 2em;
+            font-size: 3em;
             font-style: italic;
             }
             .dressings {
@@ -271,26 +285,22 @@ html
             font-size: 6em;
             }
             .dressings .header .meal-name.sub {
-            font-size: 2.5em;
+            font-size: 2em;
             }
             .dressings .content .sections {
             margin-right: 80px;
+            padding-left: 80px;
             }
             .dressings .content .sections .section.right {
-            width: 43%;
+            width: 46%;
+            margin-left: 40px;
+            border: none;
             }
             .dressings .content .sections .section .title {
             font-size: 2em;
             }
             .dressings .content .sections .section p {
-            font-size: 1.5em;
-            }
-            .dressings .content .sections .section ul li {
-            padding: 7.5px 0;
-            font-size: 1.5em;
-            min-width: 200px;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            margin-top: 0;
             }
             .dressings .brand {
             right: 20px;
@@ -315,13 +325,22 @@ html
                             span.description #{description}
 
                 .content
-                    ul.list-items
-                        each item in items
-                            li
-                                span.top= item.title
-                                
-                                if item.detail
-                                    span.detail= item.detail
+                    .entree
+                        span.head Entree
+                        span #{entree}
+                    .veg-entree
+                        span.head Vegetarian Entree
+                        span #{veg_entree}
+                    .sides
+                        span.head Sides
+                        
+                        ul.list-items
+                            each side in sides
+                                li
+                                    span.top= side.title
+                                    
+                                    if side.detail
+                                        span.detail= side.detail
 
                 .brand
                     img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
