@@ -84,27 +84,27 @@ function reader(req, res) {
 
                             if (value[1].indexOf(":") !== -1) {
                                 text_arr = value[1].split(":");
-                                menu.title = text_arr[0].trim().replace("/","_");
+                                menu.title = text_arr[0].trim();
                                 menu.subtitle = text_arr[1].trim();
                             }
                             else if (value[1].indexOf(";") !== -1) {
                                 text_arr = value[1].split(";");
-                                menu.title = text_arr[0].trim().replace("/","_");
+                                menu.title = text_arr[0].trim();
                                 menu.line_2 = text_arr[1].trim();
                             }
                             else {
-                                menu.title = value[1].replace("/","_");
+                                menu.title = value[1];
                             }
                         } else {
                             menu.subtitle = value[1];
 
                             if (value[0].indexOf(";") !== -1) {
                                 text_arr = value[0].split(";");
-                                menu.title = text_arr[0].trim().replace("/","_");
+                                menu.title = text_arr[0].trim();
                                 menu.line_2 = text_arr[1].trim();
                             }
                             else {
-                                menu.title = value[0].replace("/","_");
+                                menu.title = value[0];
                             }
                         }
                     }
@@ -126,11 +126,11 @@ function reader(req, res) {
 
                         if (value[1].indexOf(";") !== -1) {
                             text_arr = value[1].split(";");
-                            menu.theme = text_arr[0].trim().replace("/","_");
+                            menu.theme = text_arr[0].trim();
                             menu.line_2 = text_arr[1].trim();
                         }
                         else {
-                            menu.theme = value[1].replace("/","_");
+                            menu.theme = value[1];
                         }
 
                         for (i = 6; i < value.length; i++) {
@@ -152,7 +152,7 @@ function reader(req, res) {
 
                     menu.template = rows.catering;
 
-                    file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase() : menu.title.toLowerCase();
+                    file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase().replace("/","_") : menu.title.toLowerCase().replace("/","_");
 
                     template = pug.renderFile("api/templates/menu.pug", menu);
 

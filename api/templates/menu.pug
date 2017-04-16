@@ -365,7 +365,8 @@ html
                             .allergens
                                 if template === "dish"
                                     span.title Allergens
-                                p #{allergens}
+                                if allergens
+                                    p #{allergens}
                                 ul
                                     if nut && nut.toLowerCase() === "x"
                                         li.allergen.nut Nut Free
