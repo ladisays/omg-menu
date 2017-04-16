@@ -53,6 +53,10 @@ function reader(req, res) {
             var dir, menu, template, file,
                 values = data.values;
 
+            if (!values.length) {
+                return res.status(404).json({});
+            }
+
             var links = values.map(function (value) {
                 menu = {};
                 file = null;
