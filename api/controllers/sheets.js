@@ -104,7 +104,7 @@ function reader(req, res) {
                                 menu.line_2 = text_arr[1].trim();
                             }
                             else {
-                                menu.title = value[1].replace("/","_");
+                                menu.title = value[0].replace("/","_");
                             }
                         }
                     }
@@ -162,8 +162,14 @@ function reader(req, res) {
                         }
 
                         if (data) {
+                            var title = value[1];
                             dir = path.parse(data.filename);
-                            return callback(null, { title: value[1], file: "files/" + dir.base });
+
+                            if (rows.catering === "dressing") {
+                                title = value[0];
+                            }
+
+                            return callback(null, { title: title, file: "files/" + dir.base });
                         } else {
                             return callback(null, null);
                         }
