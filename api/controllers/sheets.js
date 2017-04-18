@@ -137,20 +137,10 @@ function reader(req, res) {
                             menu.theme = value[1];
                         }
 
-                        for (i = 6; i < value.length; i++) {
-                            if (value[i].indexOf(":") !== -1) {
-                                text_arr = value[i].split(":");
-                                item.title = text_arr[0].trim();
-                                item.detail = text_arr[1].trim();
+                        if (value.length > 6) {
+                            for (i = 6; i < value.length; i++) {
+                                menu.sides.push(delimit(":", value[i], item, "menu", true));
                             }
-                            else {
-                                item = {
-                                    title: value[i],
-                                    detail: ""
-                                };
-                            }
-
-                            menu.sides.push(item);
                         }
                     }
 
@@ -183,16 +173,41 @@ function reader(req, res) {
 
             async.parallel(links, function (err, result) {
                 if (err) {
-                    return res.status(400).json(err);
+                    return res.status(400).json({ message: "There was an error with the conversion.", error: err });
                 }
                 result = result.filter(function (link) {
                     return link !== null;
                 });
+                
+                if (!result.length) {
+                    return res.status(404).json({ message: "Empty data returned! Please, check the spreadsheet." });
+                }
 
                 return res.status(200).json(result);
             });
         }
     });
+}
+
+function delimit(delimiter, val, obj, template, side) {
+    var text_arr;
+
+    if (side) {
+        if (val.indexOf(delimiter) !== -1) {
+            text_arr = val.split(delimiter);
+
+            obj.title = text_arr[0].trim();
+            obj.detail = text_arr[1].trim();
+        }
+        else {
+            obj = {
+                title: val,
+                detail: ""
+            };
+        }
+
+        return obj;
+    }
 }
 
 module.exports = {

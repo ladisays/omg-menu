@@ -332,16 +332,18 @@ html
                     .veg-entree
                         span.head Vegetarian Entree
                         span #{veg_entree}
-                    .sides
-                        span.head Sides
-                        
-                        ul.list-items
-                            each side in sides
-                                li
-                                    span.top= side.title
-                                    
-                                    if side.detail
-                                        span.detail= side.detail
+                    
+                    if sides.length
+                        .sides
+                            span.head Sides
+                            
+                            ul.list-items
+                                each side in sides
+                                    li
+                                        span.top= side.title
+                                        
+                                        if side.detail
+                                            span.detail= side.detail
 
                 .brand
                     img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
