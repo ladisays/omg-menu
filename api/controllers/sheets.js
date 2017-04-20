@@ -152,8 +152,6 @@ function reader(req, res) {
                     }
                 }
 
-                console.log(menu.cards);
-
                 menu.template = rows.catering;
 
                 file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase().replace("/","_") : menu.title.toLowerCase().replace("/","_");
