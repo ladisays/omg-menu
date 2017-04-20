@@ -114,11 +114,14 @@ function reader(req, res) {
                     }
                 }
                 else if (rows.catering === "topping") {
-                    if (!value[1]) {
+                    if (!value[0]) {
                         return callback(null, null);
                     }
 
-                    menu.cards = [];
+                    menu = {
+                        title: value[0],
+                        cards: []
+                    };
 
                     for (i = 0; i < value.length; i++) {
                         menu.cards.push(delimit(";", value[i], menu, "topping"));
@@ -149,16 +152,13 @@ function reader(req, res) {
                     }
                 }
 
-                menu.template = rows.catering;
+                console.log(menu.cards);
 
-                if (menu.template === "topping") {
-                    menu.title = rows.type === "selection" ? "Toppings_" + rows.startAt + "_" + rows.endAt : "Toppings_all";
-                }
+                menu.template = rows.catering;
 
                 file = rows.catering.indexOf("menu") !== -1 ? menu.theme.toLowerCase().replace("/","_") : menu.title.toLowerCase().replace("/","_");
 
                 template = pug.renderFile("api/templates/menu.pug", menu);
-
 
                 pdf.create(template, options).toFile("./public/files/" + file + ".jpeg", function (err, data) {
                     if (err) {
@@ -169,7 +169,7 @@ function reader(req, res) {
                         var title = value[1];
                         dir = path.parse(data.filename);
 
-                        if (rows.catering === "dressing") {
+                        if (rows.catering === "dressing" || rows.catering === "topping") {
                             title = value[0];
                         }
 

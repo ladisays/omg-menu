@@ -343,8 +343,9 @@ html
             }
             .card-content .list {
             display: table;
-            width: 100%;
+            width: 80%;
             height: 85%;
+            margin: 0 auto;
             }
             .toppings {
             display: table-cell;
@@ -362,7 +363,7 @@ html
             }
             .topping .topping-name {
             color: #fff;
-            font-size: 3.25em;
+            font-size: 3.5em;
             text-transform: uppercase;
             }
             .topping .topping-ingredient {
@@ -370,7 +371,7 @@ html
             font-size: 2em;
             }
             .wrapper-topping .logo {
-            width: 350px;
+            width: 200px;
             margin: 0 auto;
             }
             .wrapper-topping .logo img {
@@ -391,11 +392,11 @@ html
                                                     li.topping
                                                         span.topping-name= topping.title
 
-                                                        if topping.ingredient
-                                                            span.topping-ingredient= topping.ingredient
+                                                        if topping.ingredients
+                                                            span.topping-ingredient (#{topping.ingredients})
 
                                         .logo
-                                            img(src="https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white-h.png")
+                                            img(src="https://s3-us-west-2.amazonaws.com/zenbox-media/toppings_logo.png")
 
         else if template.indexOf("menu") !== -1
             .wrapper-menu(class={large: template === "menu-large"})
