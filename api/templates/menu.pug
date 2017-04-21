@@ -410,12 +410,17 @@ html
                             span.description #{description}
 
                 .content
-                    .entree
-                        span.head Entree
-                        span #{entree}
-                    .veg-entree
-                        span.head Vegetarian Entree
-                        span #{veg_entree}
+                    if entrees.length
+                        .entree
+                            span.head Entree
+                            each entree in entrees
+                                span= entree.trim()
+
+                    if veg_entrees.length            
+                        .veg-entree
+                            span.head Vegetarian Entree
+                            each entree in veg_entrees
+                                span= entree.trim()
                     
                     if sides.length
                         .sides

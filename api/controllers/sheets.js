@@ -138,8 +138,8 @@ function reader(req, res) {
                         day: value[0],
                         description: value[2],
                         image_url: value[3] || "https://s3-us-west-2.amazonaws.com/zenbox-media/_default_menu.jpg",
-                        entree: value[4],
-                        veg_entree: value[5],
+                        entrees: value[4].split(";"),
+                        veg_entrees: value[5].split(";"),
                         sides: []
                     };
 
