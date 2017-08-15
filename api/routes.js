@@ -11,6 +11,9 @@ function routes(router) {
     router.route("/convert")
     .post(controllers.sheets.reader);
 
+    router.route("/menus/:menu_id")
+    .get(controllers.menus.download);
+
     router.use(function (req, res) {
         res.status(404).send({ message: "Sorry! Route not found." });
     });

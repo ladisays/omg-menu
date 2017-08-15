@@ -460,21 +460,21 @@ html
                                 if allergens
                                     p #{allergens}
                                 ul
-                                    if nut && nut.toLowerCase() === "x"
+                                    if (nut && api) || (nut && nut.toLowerCase() === "x")
                                         li.allergen.nut Nut Free
-                                    if wheat && wheat.toLowerCase() === "x"
+                                    if (wheat && api) || (wheat && wheat.toLowerCase() === "x")
                                         li.allergen.wheat Wheat Free
-                                    if soy && soy.toLowerCase() === "x"
+                                    if (soy && api) || (soy && soy.toLowerCase() === "x")
                                         li.allergen.soy Soy Free
-                                    if vegan && vegan.toLowerCase() === "x"
+                                    if (vegan && api) || (vegan && vegan.toLowerCase() === "x")
                                         li.allergen.vegan Vegetarian
-                                    if dairy && dairy.toLowerCase() === "x"
+                                    if (dairy && api) || (dairy && dairy.toLowerCase() === "x")
                                         li.allergen.dairy Dairy Free
-                                    if gluten && gluten.toLowerCase() === "x"
+                                    if (gluten && api) || (gluten && gluten.toLowerCase() === "x")
                                         li.allergen.gluten Gluten Free
-                                    if paleo && paleo.toLowerCase() === "x"
+                                    if (paleo && api) || (paleo && paleo.toLowerCase() === "x")
                                         li.allergen.paleo Paleo
-                                    if egg && egg.toLowerCase() === "x"
+                                    if (egg && api) || (egg && egg.toLowerCase() === "x")
                                         li.allergen.egg Egg Free
                 .brand
                     img(src='https://s3-us-west-2.amazonaws.com/zenbox-media/omg-logo-white.png')
