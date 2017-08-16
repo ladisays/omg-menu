@@ -159,10 +159,6 @@ function formatIngredients(ingredients) {
         var name = ingredient.name;
         result += name.replace(name[0], name[0].toUpperCase());
 
-        if (ingredient.description) {
-            result += " (" + ingredient.description + ")";
-        }
-
         if (i !== (ingredients.length - 1)) {
             result += ", ";
         }
